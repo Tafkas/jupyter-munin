@@ -16,6 +16,9 @@ BASE_URL = 'http:<myserver>/api/{}'
 
 
 def get_number_of_notebooks():
+    """
+    :return: the number of all notebooks hosted on the server including sub-directories
+    """
     r = requests.get(BASE_URL.format('contents'))
     data = r.json()
     directories = []
@@ -42,6 +45,9 @@ def get_number_of_notebooks():
 
 
 def get_number_of_running_notebooks():
+    """
+    :return:  the number of all currently running notebooks
+    """
     r = requests.get(BASE_URL.format('sessions'))
     data = r.json()
     return len(data)
