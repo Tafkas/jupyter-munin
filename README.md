@@ -16,6 +16,11 @@ A munin plugin to monitor the amount of Jupyter notebooks on your Linux sever.
    
 2. Create symbolic links to /etc/munin/plugins.
 
-3. Restart the munin-node daemon: /etc/init.d/munin-node restart.
+3. Create entry in /etc/munin/plugin-conf.d/munin-node: 
 
-4. Done. You should now start to see the charts on the Munin pages.
+4. Restart the munin-node daemon: /etc/init.d/munin-node restart.
+        
+        [juypter_*]  
+        env.juypter_url <url_to_your_juypter_api_endpoint>  
+
+5. Done. You should now start to see the charts on the Munin pages.
