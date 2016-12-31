@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-juypter_notebooks_munin.py  A munin plugin for Linux to monitor the amount of jupyter notebooks
-Copyright (C) 2016 Christian Stade-Schuldt
-Author: Christian Stade-Schuldt
-Like Munin, this plugin is licensed under the GNU GPL v2 license
-http://www.opensource.org/licenses/GPL-2.0
+juypter_notebooks_munin.py
+
+Created by Christian Stade-Schuldt on 2016-12-30.
+Copyright (c) 2016 Project-A Ventures. All rights reserved.
 """
 import sys
-
+import os
 import requests
 
-# This is the URL to your Jupyter Noteobook server's API endpoint
-BASE_URL = 'http:<myserver>/api/{}'
+BASE_URL = os.environ['jupyter_url']
 
 
 def get_number_of_notebooks():
     """
-    :return: the number of all notebooks hosted on the server including sub-directories
+    Fetches the number of all notebooks hosted on the server
+    including sub-directories from the API
+    :return: number of all notebooks
     """
-    r = requests.get(BASE_URL.format('contents'))
+    r = requests.get(BASE_URL + 'contents')
     data = r.json()
     directories = []
     number_of_notebooks = 0
@@ -34,7 +34,7 @@ def get_number_of_notebooks():
     # get nested notebooks and directories
     while len(directories) > 0:
         current_dir = directories.pop()
-        r = requests.get(BASE_URL.format('contents') + '/{}'.format(current_dir))
+        r = requests.get(BASE_URL + 'contents/' + current_dir)
         data = r.json()
         for elem in data['content']:
             if elem['type'] == 'directory':
@@ -46,9 +46,10 @@ def get_number_of_notebooks():
 
 def get_number_of_running_notebooks():
     """
-    :return:  the number of all currently running notebooks
+    Fetches the number of currently running notebooks from the API
+    :return: number of running notebooks
     """
-    r = requests.get(BASE_URL.format('sessions'))
+    r = requests.get(BASE_URL + 'sessions')
     data = r.json()
     return len(data)
 
