@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-juypter_notebooks_munin.py
+jupyter_notebooks_munin.py
 
 Created by Christian Stade-Schuldt on 2016-12-30.
 Copyright (c) 2016 Project-A Ventures. All rights reserved.
