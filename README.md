@@ -16,15 +16,15 @@ jupyter-munin shows you the amount of Jupyter notebooks and the number of runnin
 
         $ pip install requests
 
-1. Copy all the scripts to =/usr/share/munin/plugins
+1. Copy all the scripts to /usr/share/munin/plugins.
 
 2. Create symbolic links to /etc/munin/plugins.
 
 3. Create entry in /etc/munin/plugin-conf.d/munin-node:
 
-4. Restart the munin-node daemon: /etc/init.d/munin-node restart.
+        [jupyter_*]  
+        env.jupyter_url <url_to_your_jupyter_api_endpoint>  
 
-        [juypter_*]  
-        env.juypter_url <url_to_your_juypter_api_endpoint>  
+4. Restart the munin-node daemon: /etc/init.d/munin-node restart.
 
 5. Done. You should now start to see the charts on the Munin pages.
